@@ -5,14 +5,14 @@ Slight Diary
 
 Setup
 -----
-__1.__      In Eclipse, just import the library as an Android library project.
+__1.__      In Eclipse, just import the library as an Android project.
 
-__2.__      Project > Clean to generate the binaries you need, like R.java, etc.
-
-__3.__      Then, just add belows libraries as dependencies to your existing project and you're good to go!
+__2.__      Then, just add belows libraries as dependencies to your existing project.
 * [SlidingMenu][1]
 * [ActionBarSherlock][2]
 * [ListViewAnimations][3]
+
+__3.__      Project > Clean to generate the binaries you need, like R.java, etc and you're good to go!
 
 Preview
 -------
