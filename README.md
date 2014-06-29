@@ -16,11 +16,10 @@ __3.__      Project > Clean to generate the binaries you need, like R.java, etc 
 
 Preview
 -------
-![image]([4])
+![image](https://raw.githubusercontent.com/Jeff-Z/JDiaryS/master/Previews.jpg)
 
 
 [1]: https://github.com/jfeinstein10/SlidingMenu
 [2]: https://github.com/JakeWharton/ActionBarSherlock
 [3]: https://github.com/nhaarman/ListViewAnimations
-[4]: https://github.com/Jeff-Z/JDiaryS/blob/master/Previews.jpg?raw=true
 
