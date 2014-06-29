@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffff">
+
+	<RelativeLayout 
+	    android:id="@+id/view_content_panel"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+	
+	    <TextView
+	        android:id="@+id/view_content_title_year"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        
+	        android:layout_marginTop="100dp"
+	        android:layout_marginRight="4dp"
+	
+	        android:textSize="20sp"
+	        android:textColor="#EBEBEB"
+	        android:textStyle="bold" />
+	
+	    <TextView
+	        android:id="@+id/view_content_title_month"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@+id/view_content_title_year"
+	        
+	        android:layout_marginTop="0dp"
+	        android:layout_marginBottom="30dp"
+	        
+	        android:textSize="45sp"
+	        android:textColor="#F2F2F2"
+	        android:textStyle="bold" />
+	 
+	    <TextView
+	        android:id="@+id/view_content_body"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/view_content_title_month"
+	        
+	        android:layout_marginTop="0dp"
+	        android:layout_marginBottom="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"
+	        
+	        android:paddingTop="17dp"
+	        android:paddingBottom="17dp"
+	        android:paddingLeft="6dp"
+	        android:paddingRight="6dp"
+	
+	        android:background="@drawable/text_border"
+	        
+	        android:textSize="14sp" />
+	        
+	    <EditText
+	        android:id="@+id/view_content_body_edit"
+	        
+	        android:visibility="gone"
+	        
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/view_content_title_month"
+	        
+	        android:layout_marginTop="0dp"
+	        android:layout_marginBottom="0dp"
+	        android:layout_marginLeft="0dp"
+	        android:layout_marginRight="0dp"
+	        
+	        android:paddingTop="17dp"
+	        android:paddingBottom="17dp"
+	        android:paddingLeft="6dp"
+	        android:paddingRight="6dp"
+	
+	        android:background="@drawable/editor_background"
+	        
+	        android:textSize="14sp" 
+	        android:inputType="textMultiLine"/>
+	    
+	    <Space 
+	        android:layout_width="match_parent"
+	        android:layout_height="50dp"
+	        
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/view_content_body"
+	        />
+	
+	</RelativeLayout>
+	
+	
+	<LinearLayout
+        android:id="@+id/view_edit_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#DDDDDF"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/view_button_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="1dip"
+            android:layout_marginTop="1dip"
+            android:background="#F5FFF5"
+            android:onClick="onClickEditDiary"
+            android:padding="15dp"
+            android:text="编辑"
+            android:textColor="#C0EBB8"
+            android:textSize="30sp" />
+
+        <Button
+            android:id="@+id/view_button_delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dip"
+            android:background="#FFF1F0"
+            android:onClick="onClickDeleteDiary"
+            android:padding="15dp"
+            android:text="删除"
+            android:textColor="#FFBFBF"
+            android:textSize="30sp" />
+        
+         <Button
+            android:id="@+id/view_button_save"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dip"
+            android:background="#F5FFF5"
+            android:onClick="onClickSaveDiary"
+            android:padding="15dp"
+            android:text="保存"
+            android:textColor="#C0EBB8"
+            android:textSize="30sp" />
+        
+        
+    </LinearLayout>
+    
+</LinearLayout>

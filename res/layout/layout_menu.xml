@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#CCD3DD" >
+
+    <ImageView
+        android:id="@+id/imageView_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="14dp"
+        android:src="@drawable/logo" 
+        android:contentDescription="LOGO"/>
+
+    <ImageView
+        android:id="@+id/imageView_write"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView_logo"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/button_write"
+        android:onClick="onClickWriteDiary" 
+        android:contentDescription="Write Diary"/>
+        
+     <ImageView
+        android:id="@+id/imageView_calander"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView_write"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/button_calander"
+        android:onClick="onClickOpenCalander" 
+        android:contentDescription="Open Calander"/>
+
+
+    <EditText
+        android:id="@+id/editText_SearchInput"
+        android:visibility="gone"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        
+        android:layout_below="@+id/imageView_calander"
+        android:layout_alignParentLeft="true"
+        
+        android:layout_marginTop="120dp"
+
+        android:hint="输入搜索内容"
+        android:imeOptions="actionSearch"
+        android:singleLine="true" />
+
+    <ImageView
+        android:id="@+id/imageView_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView_calander"
+        
+        android:layout_marginTop="120dp"
+        
+        android:onClick="showSearchInput"
+        android:src="@drawable/button_search" 
+        android:contentDescription="Search"/>
+    
+    <ImageView
+        android:id="@+id/imageView_setting"
+        android:visibility="visible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/icon_setting"
+        android:onClick="onClickImportDiaryData" 
+        android:contentDescription="Setting"/>
+
+</RelativeLayout>
