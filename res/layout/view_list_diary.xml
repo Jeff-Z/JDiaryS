@@ -50,7 +50,6 @@
         
         android:background="@drawable/text_border"
         
-        
         android:paddingTop="17dp"
         android:paddingBottom="17dp"
         android:paddingLeft="6dp"

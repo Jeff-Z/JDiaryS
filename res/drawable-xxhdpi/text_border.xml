@@ -15,7 +15,7 @@
         android:top="1dip">
         <shape>
             <!-- 背景颜色值 -->
-            <solid android:color="#fffff8" />
+            <solid android:color="#FCFCFC" />
         </shape>
     </item>
 
