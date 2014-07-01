@@ -16,7 +16,7 @@ __3.__      Project > Clean to generate the binaries and you're good to go!
 
 Preview
 -------
-![image](https://raw.githubusercontent.com/Jeff-Z/JDiaryS/master/Previews.jpg)
+![image](http://s.hartech.cn/res/img/JDiaryS_Previews.jpg)
 
 
 [1]: https://github.com/jfeinstein10/SlidingMenu
