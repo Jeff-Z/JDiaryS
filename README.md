@@ -18,8 +18,12 @@ Preview
 -------
 ![image](http://s.hartech.cn/res/img/JDiaryS_Previews.jpg)
 
+Developed By
+-------
+* Jeff.Z - [www.hartech.cn][4]
 
 [1]: https://github.com/jfeinstein10/SlidingMenu
 [2]: https://github.com/JakeWharton/ActionBarSherlock
 [3]: https://github.com/nhaarman/ListViewAnimations
+[4]: http://www.hartech.cn
 
