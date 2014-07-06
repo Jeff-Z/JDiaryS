@@ -12,7 +12,6 @@ import cn.hartech.jdiarys.FragmentListPage.PageState;
 import cn.hartech.jdiarys.engine.importdiary.ImportOrangeDiary;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
 import cn.hartech.jdiarys.ui.MyDialogs;
-import cn.hartech.jdiarys.utils.MyUtility;
 
 /**
  * 把界面所有**用户交互**的动作都拎出来，这里作为Controller
@@ -65,6 +64,7 @@ public class Actions {
 
 		MyDialogs.makeConfirmDialog(All.mainActivity, "确定使用OrangeDiary覆盖现有数据？",
 				action);
+
 	}
 
 	// 用户在列表页面双击某一个日记记录时触发
@@ -120,8 +120,6 @@ public class Actions {
 
 	// 当进入列表页面时触发
 	public static void whenEnterListPage() {
-
-		MyUtility.fireLog();
 
 		InputMethodManager imm = (InputMethodManager) All.mainActivity
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
