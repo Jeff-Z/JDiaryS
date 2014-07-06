@@ -149,8 +149,7 @@ public class FragmentDiaryPage extends Fragment {
 
 		} else if (pageState == PageState.EDITING) {
 
-			if (newText == null
-					|| newText.trim().equals(diaryPOJO.content.trim())) {
+			if (newText == null || newText.equals(diaryPOJO.content)) {
 
 				return false;
 			}
