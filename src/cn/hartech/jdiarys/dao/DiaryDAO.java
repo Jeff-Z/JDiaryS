@@ -3,6 +3,8 @@ package cn.hartech.jdiarys.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.util.Log;
@@ -102,15 +104,31 @@ public class DiaryDAO extends DBHelper {
 		return getDiaryListFromCursor(cursor);
 	}
 
+	// 支持多关键字搜索：如 "巴菲特 经济"
 	public List<DiaryPOJO> getDiaryBySearch(String text) {
 
 		if (text == null || text.trim().equals("")) {
 			return null;
 		}
 
-		Cursor cursor = db.rawQuery("select * from dairy_content "
-				+ "where content like ? " + "order by diary_time desc",
-				new String[] { "%" + text + "%" });
+		// 取出用空格隔开的多个关键字
+		String[] textArray = StringUtils.split(text);
+
+		String condition = "";
+
+		for (int i = 0; i < textArray.length; i++) {
+
+			if (i == 0) {
+				condition = " content like ?";
+			} else {
+				condition += " and content like ?";
+			}
+
+			textArray[i] = "%" + textArray[i] + "%";
+		}
+
+		Cursor cursor = db.rawQuery("select * from dairy_content where"
+				+ condition + " order by diary_time desc", textArray);
 
 		return getDiaryListFromCursor(cursor);
 	}
