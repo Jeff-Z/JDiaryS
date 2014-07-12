@@ -25,21 +25,30 @@ import cn.hartech.jdiarys.ui.MyDialogs;
  */
 public class Actions {
 
+	// 页面跳出提示信息的统一入口
+	public static void showToast(String text) {
+
+		showToast(text, Toast.LENGTH_SHORT);
+	}
+
+	public static void showToast(String text, int time) {
+
+		Toast.makeText(All.mainActivity, text, time).show();
+	}
+
 	// 用户搜索点击回车后
 	public static void onSearch(String text) {
 
-		if (text == null || text.trim().equals("")) {
-			return;
-		}
-
 		List<DiaryPOJO> diaryList = All.diaryDAO.getDiaryBySearch(text);
 
-		Toast.makeText(All.mainActivity, "共搜索到" + diaryList.size() + "条记录。",
-				Toast.LENGTH_SHORT).show();
-
-		if (diaryList.size() == 0) {
+		if (diaryList == null) {
+			return;
+		} else if (diaryList.size() == 0) {
+			showToast("搜索不到内容");
 			return;
 		}
+
+		showToast("共搜索到" + diaryList.size() + "条记录。");
 
 		All.listPage.pageState = PageState.SEARCH_RESULT;
 
@@ -160,8 +169,7 @@ public class Actions {
 			if (All.diaryPage.addOrUpdateDiary()) {
 				All.diaryPage.setMode(FragmentDiaryPage.PageState.SHOWING);
 			} else {
-				Toast.makeText(All.mainActivity, "什么都没写就想保存？",
-						Toast.LENGTH_SHORT).show();
+				Actions.showToast("什么都没写就想保存？");
 			}
 
 		} else if (All.diaryPage.pageState == FragmentDiaryPage.PageState.EDITING) {

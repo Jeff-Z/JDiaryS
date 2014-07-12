@@ -77,7 +77,7 @@ public class DBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase database) {
 
 		// 创建run_record表
-		String createTableSQL = "create table dairy_content"
+		String createTableSQL = "create table diary_content"
 				+ "(_id integer primary key autoincrement, "
 				+ "diary_time, diary_year, diary_month, diary_day, diary_hour, "
 				+ "content, tags)";

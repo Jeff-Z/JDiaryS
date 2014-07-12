@@ -17,7 +17,6 @@ import android.view.View.OnKeyListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 import cn.hartech.jdiarys.dao.DiaryDAO;
 import cn.hartech.jdiarys.utils.Constant;
 
@@ -291,8 +290,7 @@ public class MainActivity extends SlidingFragmentActivity {
 
 				if ((System.currentTimeMillis() - mExitTime) > 2000) {
 
-					Toast.makeText(this, "你再按一次我就滚！", Toast.LENGTH_SHORT)
-							.show();
+					Actions.showToast("你再按一次我就滚！");
 					mExitTime = System.currentTimeMillis();
 
 				} else {

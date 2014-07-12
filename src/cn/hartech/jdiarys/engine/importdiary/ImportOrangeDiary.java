@@ -14,7 +14,7 @@ import java.util.TreeSet;
 import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
+import cn.hartech.jdiarys.Actions;
 import cn.hartech.jdiarys.dao.DiaryDAO;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
 import cn.hartech.jdiarys.utils.Constant;
@@ -47,13 +47,11 @@ public class ImportOrangeDiary {
 
 			diaryDAO.addList(diaryList);
 
-			Toast.makeText(context, "共导入" + diaryList.size() + "条日记记录。",
-					Toast.LENGTH_SHORT).show();
+			Actions.showToast("共导入" + diaryList.size() + "条日记记录。");
 
 		} catch (Exception e) {
 
-			Toast.makeText(context, "插入数据库失败：msg=" + e.getMessage(),
-					Toast.LENGTH_SHORT).show();
+			Actions.showToast("插入数据库失败：msg=" + e.getMessage());
 		}
 
 	}
@@ -70,7 +68,6 @@ public class ImportOrangeDiary {
 				+ MyUtility.DF_yyyy_MM_dd_HH_mm_ss.format(csvFile
 						.lastModified());
 		Log.e("JDiaryS", log);
-		//		Toast.makeText(context, log, Toast.LENGTH_SHORT).show();
 
 		// 加入红黑树，这样每插入一条记录即马上按照日期排序
 		Set<DiaryPOJO> daily = new TreeSet<DiaryPOJO>(new DateComparator());
@@ -106,25 +103,22 @@ public class ImportOrangeDiary {
 
 		} catch (FileNotFoundException e) {
 
-			Toast.makeText(context,
-					"ERROR: 文件 " + csvFile.getAbsolutePath() + " 找不到。",
-					Toast.LENGTH_SHORT).show();
+			Actions.showToast("ERROR: 文件 " + csvFile.getAbsolutePath()
+					+ " 找不到。");
 
 			Log.e("JDiaryS", "解析CVS文件出错", e);
 			return null;
 
 		} catch (IOException e) {
 
-			Toast.makeText(context, "ERROR: 解析CSV文件中出现异常", Toast.LENGTH_SHORT)
-					.show();
+			Actions.showToast("ERROR: 解析CSV文件中出现异常");
 
 			Log.e("JDiaryS", "解析CVS文件出错", e);
 			return null;
 
 		} catch (ParseException e) {
 
-			Toast.makeText(context, "ERROR: 解析CSV中日期格式出现问题", Toast.LENGTH_SHORT)
-					.show();
+			Actions.showToast("ERROR: 解析CSV中日期格式出现问题");
 
 			Log.e("JDiaryS", "解析CVS文件出错", e);
 			return null;

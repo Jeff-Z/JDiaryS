@@ -16,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
 import cn.hartech.jdiarys.utils.Constant;
 
@@ -143,7 +142,7 @@ public class FragmentDiaryPage extends Fragment {
 
 			pageState = PageState.EDITING;
 
-			Toast.makeText(getActivity(), "添加完毕！", Toast.LENGTH_SHORT).show();
+			Actions.showToast("添加完毕！");
 
 			return true;
 
@@ -160,7 +159,7 @@ public class FragmentDiaryPage extends Fragment {
 			All.diaryDAO.update(diaryPOJO);
 			All.adapterListPageData.set(listViewPosition, diaryPOJO);
 
-			Toast.makeText(getActivity(), "保存好啦~", Toast.LENGTH_SHORT).show();
+			Actions.showToast("保存好啦~");
 
 			return true;
 		}
