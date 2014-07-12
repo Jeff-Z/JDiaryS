@@ -5,6 +5,10 @@ Slight Diary
 
 一直想做一个自己喜欢的日记APP，什么功能没有，就是为了写日记，看日记。关键是，使用时用户体验要好。<br/>开源出来，你也可以修改成自己喜欢的APP。
 
+Try It!
+-----
+[Download][5]
+
 Setup
 -----
 __1.__      In Eclipse, import the project as an Android project.
@@ -28,4 +32,4 @@ Developed By
 [2]: https://github.com/JakeWharton/ActionBarSherlock
 [3]: https://github.com/nhaarman/ListViewAnimations
 [4]: http://www.hartech.cn
-
+[5]: https://github.com/Jeff-Z/JDiaryS/blob/master/JDiaryS.apk?raw=true
