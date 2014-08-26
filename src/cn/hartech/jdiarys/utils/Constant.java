@@ -8,10 +8,7 @@ public class Constant {
 	public static final String APP_NAME = "JDiaryS!";
 
 	// 本app在SD Card上的目录位置
-	public static final String APP_FOLDER = "0_JDiaryS";
-
-	// 保存的日志XML文件名
-	public static final String DIARY_FILE = "DailyContent.xml";
+	public static final String APP_FOLDER = "JDiaryS";
 
 	// 配置文件名称
 	public static final String PROPERTY_FILE_NAME = "property.txt";
@@ -31,7 +28,7 @@ public class Constant {
 	// 双击列表时的间隔时间（毫秒）
 	public static final int DOUBLE_CLICK_INTERVAL = 1000;
 
-	// App显示的屏幕高度、宽度
+	// App显示的屏幕高度、宽度（启动时自动获取并作为全局参数在这里）
 	public static int WINDOW_HEIGHT, WINDOW_WIDTH;
 
 }

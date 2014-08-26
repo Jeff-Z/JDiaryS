@@ -185,7 +185,7 @@ public class DiaryDAO extends DBHelper {
 
 	public int delete(DiaryPOJO diary) {
 
-		return db.delete("_content", "_id = ?",
+		return db.delete("diary_content", "_id = ?",
 				new String[] { String.valueOf(diary._id) });
 	}
 
