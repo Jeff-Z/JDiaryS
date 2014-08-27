@@ -61,7 +61,7 @@
 	
 	        android:background="@drawable/text_border"
 	        
-	        android:textSize="15sp" />
+	        android:textSize="14sp" />
 	        
 	    <EditText
 	        android:id="@+id/view_content_body_edit"
@@ -86,7 +86,7 @@
 	
 	        android:background="@drawable/editor_background"
 	        
-	        android:textSize="15sp" 
+	        android:textSize="14sp" 
 	        android:inputType="textMultiLine"/>
 	
 	</RelativeLayout>

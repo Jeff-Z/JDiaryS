@@ -35,6 +35,9 @@ public class MainActivity extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		// 添加启动的动画
+		overridePendingTransition(R.anim.slide_to_left, R.anim.slide_to_right);
+
 		All.mainActivity = this;
 		All.diaryDAO = new DiaryDAO(this);
 
@@ -308,6 +311,14 @@ public class MainActivity extends SlidingFragmentActivity {
 		}
 
 		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	public void finish() {
+		super.finish();
+
+		// 添加退出的动画
+		overridePendingTransition(R.anim.slide_to_left, R.anim.slide_to_right);
 	}
 
 	@Override

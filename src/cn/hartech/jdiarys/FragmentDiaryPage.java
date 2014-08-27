@@ -87,6 +87,7 @@ public class FragmentDiaryPage extends Fragment {
 		textViewMonth = (TextView) view
 				.findViewById(R.id.view_content_title_month);
 		textViewContent = (TextView) view.findViewById(R.id.view_content_body);
+		textViewContent.setOnClickListener(new DoubleClickListener());
 		editTextContent = (EditText) view
 				.findViewById(R.id.view_content_body_edit);
 		layoutEditPanel = (LinearLayout) view
@@ -302,7 +303,7 @@ public class FragmentDiaryPage extends Fragment {
 
 				lastClickTime = 0;
 
-				//				Actions.onClickEnableEditDiary();
+				Actions.onClickEnableEditDiary();
 
 			} else {
 				lastClickTime = System.currentTimeMillis();
