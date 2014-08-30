@@ -18,9 +18,13 @@ public class SearchEngine {
 	/**
 	 * 这里是统一入口，主要是做分发
 	 * 
-	 * 1, 支持多关键字搜索：如 "巴菲特 经济"
+	 * 1, 支持多关键字搜索：
+	 * 		如 "巴菲特 经济"
 	 * 
-	 * 2, 支持SQL搜索模式，可以输入SQL中的where子句，如:
+	 * 2, 日期搜索模式：
+	 * 		输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 * 
+	 * 3, 支持SQL搜索模式，可以输入SQL中的where子句，如:
 	 * 		"s content='abc' and hour=4"
 	 * 		"s length(content)>100"
 	 * 
@@ -43,12 +47,95 @@ public class SearchEngine {
 
 		}
 
+		// 日期搜索模式
+		else if (isDateSearchMode(text)) {
+
+			return searchWithDate(text);
+		}
+
 		// 多关键字模式
 		else {
 
 			return searchWithMutiWords(text);
 		}
 
+	}
+
+	/**
+	 * 
+	 * 日期搜索模式：
+	 * 	输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 * 
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年8月30日
+	 * @param text
+	 * @return
+	 */
+	private static List<DiaryPOJO> searchWithDate(String text) {
+
+		List<DiaryPOJO> result = null;
+
+		// 经过前面的检查，这里进来的肯定是长度为4|6|8的数字
+
+		if (text.length() == 4) {
+
+			String sql = "select * from diary_content "
+					+ " where diary_year = " + text + " order by diary_time ";
+
+			result = All.diaryDAO.getListWithSQL(sql, null);
+
+		} else if (text.length() == 6) {
+
+			String sql = "select * from diary_content "
+					+ " where diary_year = " + text.substring(0, 4)
+					+ " and diary_month = " + text.substring(4, 6)
+					+ " order by diary_time ";
+
+			result = All.diaryDAO.getListWithSQL(sql, null);
+
+		} else if (text.length() == 8) {
+
+			String sql = "select * from diary_content "
+					+ " where diary_year = " + text.substring(0, 4)
+					+ " and diary_month = " + text.substring(4, 6)
+					+ " and diary_day = " + text.substring(6, 8)
+					+ " order by diary_time ";
+
+			result = All.diaryDAO.getListWithSQL(sql, null);
+
+		}
+
+		return result;
+	}
+
+	/**
+	 * 判断是否是日期搜索模式
+	 * 
+	 * 日期搜索模式：
+	 * 	输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年8月30日
+	 * @param text
+	 * @return
+	 */
+	private static boolean isDateSearchMode(String text) {
+
+		if (!(text.length() == 4 || text.length() == 6 || text.length() == 8)) {
+			return false;
+		}
+
+		if (!(text.startsWith("20") || text.startsWith("19"))) {
+			return false;
+		}
+
+		try {
+			Integer.parseInt(text);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
 	}
 
 	/**

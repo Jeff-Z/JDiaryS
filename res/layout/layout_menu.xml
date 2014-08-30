@@ -47,7 +47,7 @@
         android:layout_below="@+id/imageView_calander"
         android:layout_alignParentLeft="true"
         
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="50dp"
 
         android:hint="输入搜索内容"
         android:imeOptions="actionSearch"
@@ -61,7 +61,7 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imageView_calander"
         
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="50dp"
         
         android:onClick="showSearchInput"
         android:src="@drawable/button_search" 
