@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import cn.hartech.jdiarys.FragmentListPage.PageState;
 import cn.hartech.jdiarys.engine.importdiary.ImportOrangeDiary;
+import cn.hartech.jdiarys.engine.search.SearchEngine;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
 import cn.hartech.jdiarys.ui.MyDialogs;
 
@@ -41,7 +42,7 @@ public class Actions {
 	// 用户搜索点击回车后
 	public static void onSearch(String text) {
 
-		List<DiaryPOJO> diaryList = All.diaryDAO.getDiaryBySearch(text);
+		List<DiaryPOJO> diaryList = SearchEngine.search(text);
 
 		if (diaryList == null) {
 			return;

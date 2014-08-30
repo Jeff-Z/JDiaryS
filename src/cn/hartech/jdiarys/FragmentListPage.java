@@ -62,7 +62,7 @@ public class FragmentListPage extends Fragment {
 
 		initListView(layout);
 
-		List<DiaryPOJO> diaryList = All.diaryDAO.getLastItemsByOffsetLimit(0,
+		List<DiaryPOJO> diaryList = All.diaryDAO.getListByOffsetLimit(0,
 				Constant.MONTH_ITEM_INIT_COUNT);
 		loadDataForPage(diaryList);
 
@@ -183,7 +183,7 @@ public class FragmentListPage extends Fragment {
 				if (All.listPage.pageState == PageState.LATEST_DIARY) {
 
 					List<DiaryPOJO> diaryList = All.diaryDAO
-							.getLastItemsByOffsetLimit(
+							.getListByOffsetLimit(
 									All.adapterListPageData.getCount(),
 									Constant.AUTO_LOAD_DATA_COUNT);
 

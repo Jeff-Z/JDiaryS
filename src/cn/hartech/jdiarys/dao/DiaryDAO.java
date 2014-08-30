@@ -3,11 +3,8 @@ package cn.hartech.jdiarys.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteException;
 import android.util.Log;
 import android.widget.Toast;
 import cn.hartech.jdiarys.Actions;
@@ -88,7 +85,7 @@ public class DiaryDAO extends DBHelper {
 	}
 
 	// 从offset位置开始，返回count条记录
-	public List<DiaryPOJO> getLastItemsByOffsetLimit(int offset, int count) {
+	public List<DiaryPOJO> getListByOffsetLimit(int offset, int count) {
 
 		Cursor cursor = db.rawQuery("select * from diary_content "
 				+ "order by diary_time desc limit ? offset ?", new String[] {
@@ -97,7 +94,8 @@ public class DiaryDAO extends DBHelper {
 		return getDiaryListFromCursor(cursor);
 	}
 
-	public List<DiaryPOJO> getDiaryByYearMonth(int year, int month) {
+	// 根据年份月份获取列表
+	public List<DiaryPOJO> getListByYearMonth(int year, int month) {
 
 		Cursor cursor = db.rawQuery("select * from diary_content "
 				+ "where diary_year = ? and diary_month = ? "
@@ -107,80 +105,22 @@ public class DiaryDAO extends DBHelper {
 		return getDiaryListFromCursor(cursor);
 	}
 
-	/**
-	 * 1, 支持多关键字搜索：如 "巴菲特 经济"
-	 * 
-	 * 2, 支持SQL搜索模式，可以输入SQL中的where子句，如:
-	 * 		"s content='abc' and hour=4"
-	 * 		"s len(content)>100"
-	 * 
-	 * @param text
-	 * @return
-	 */
-	public List<DiaryPOJO> getDiaryBySearch(String text) {
-
-		if (text == null || text.trim().equals("")) {
-			return null;
-		}
-
-		text = text.trim();
-
-		// 支持SQL搜索模式
-		if (text.startsWith("s")) {
-
-			return searchWithSQL(text);
-		}
-
-		// 取出用空格隔开的多个关键字
-		String[] textArray = StringUtils.split(text);
-
-		String condition = "";
-
-		for (int i = 0; i < textArray.length; i++) {
-
-			if (i == 0) {
-				condition = " content like ?";
-			} else {
-				condition += " and content like ?";
-			}
-
-			textArray[i] = "%" + textArray[i] + "%";
-		}
-
-		Cursor cursor = db.rawQuery("select * from diary_content where"
-				+ condition + " order by diary_time desc", textArray);
-
-		return getDiaryListFromCursor(cursor);
-	}
-
-	/**
-	 * 
-	 * 支持SQL搜索模式，可以输入SQL中的where子句，如:
-	 * 		"s content='abc' and hour=4"
-	 * 		"s len(content)>100"
-	 * 
-	 * @param substring
-	 * @return
-	 */
-	private List<DiaryPOJO> searchWithSQL(String where) {
-
-		where = where.substring(1);
-
-		Cursor cursor = null;
+	// 根据自己拼接的SQL查询数据
+	public List<DiaryPOJO> getListWithSQL(String sql, String[] values) {
 
 		try {
 
-			cursor = db.rawQuery("select * from diary_content where " + where
-					+ " order by diary_time desc", null);
+			Cursor cursor = db.rawQuery(sql, values);
 
-		} catch (SQLiteException ex) {
+			return getDiaryListFromCursor(cursor);
+
+		} catch (Exception ex) {
 
 			Actions.showToast(ex.getMessage(), Toast.LENGTH_LONG);
+			Log.e("JDiaryS", "DB Exception", ex);
 
 			return null;
 		}
-
-		return getDiaryListFromCursor(cursor);
 	}
 
 	public int delete(DiaryPOJO diary) {
