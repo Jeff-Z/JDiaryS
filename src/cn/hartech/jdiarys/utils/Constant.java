@@ -26,7 +26,7 @@ public class Constant {
 	public static final int AUTO_LOAD_DATA_COUNT = 50;
 
 	// 双击列表时的间隔时间（毫秒）
-	public static final int DOUBLE_CLICK_INTERVAL = 1000;
+	public static final int DOUBLE_CLICK_INTERVAL = 300;
 
 	// App显示的屏幕高度、宽度（启动时自动获取并作为全局参数在这里）
 	public static int WINDOW_HEIGHT, WINDOW_WIDTH;
