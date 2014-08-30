@@ -2,6 +2,8 @@ package cn.hartech.jdiarys;
 
 import java.util.List;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -177,5 +179,19 @@ public class Actions {
 			All.diaryPage.addOrUpdateDiary();
 			All.diaryPage.setMode(FragmentDiaryPage.PageState.SHOWING);
 		}
+	}
+
+	// 用户长按日记详情 - 复制到剪贴板
+	public static void onLongClickDiaryContent(String content) {
+
+		ClipboardManager clipboard = (ClipboardManager) All.mainActivity
+				.getSystemService(Context.CLIPBOARD_SERVICE);
+
+		ClipData clipData = ClipData.newPlainText(
+				"Copy Text Content From JDiaryS", content);
+		clipboard.setPrimaryClip(clipData);
+
+		Actions.showToast("复制好啦~~");
+
 	}
 }

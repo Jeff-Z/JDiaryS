@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
@@ -23,7 +24,7 @@ public class FragmentDiaryPage extends Fragment {
 
 	private TextView textViewYear;
 	private TextView textViewMonth;
-	private TextView textViewContent;
+	public TextView textViewContent;
 	public EditText editTextContent;
 	private ScrollView scrollView;
 	private LinearLayout layoutEditPanel;
@@ -86,8 +87,11 @@ public class FragmentDiaryPage extends Fragment {
 				.findViewById(R.id.view_content_title_year);
 		textViewMonth = (TextView) view
 				.findViewById(R.id.view_content_title_month);
+
 		textViewContent = (TextView) view.findViewById(R.id.view_content_body);
 		textViewContent.setOnClickListener(new DoubleClickListener());
+		textViewContent.setOnLongClickListener(new MyLongClickListener());
+
 		editTextContent = (EditText) view
 				.findViewById(R.id.view_content_body_edit);
 		layoutEditPanel = (LinearLayout) view
@@ -284,7 +288,6 @@ public class FragmentDiaryPage extends Fragment {
 
 	/**
 	 * 处理双击事件
-	 * 【现在没用】
 	 * 
 	 * @author jin.zheng
 	 * @date 2014年6月12日
@@ -309,6 +312,25 @@ public class FragmentDiaryPage extends Fragment {
 				lastClickTime = System.currentTimeMillis();
 			}
 
+		}
+	}
+
+	/**
+	 * 处理用户长按文字内容时，自动复制到剪贴板
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年8月30日
+	 */
+	private final class MyLongClickListener implements OnLongClickListener {
+
+		@Override
+		public boolean onLongClick(View v) {
+
+			String content = ((TextView) v).getText().toString();
+
+			Actions.onLongClickDiaryContent(content);
+
+			return true;
 		}
 	}
 
