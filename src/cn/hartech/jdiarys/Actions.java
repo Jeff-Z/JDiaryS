@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import cn.hartech.jdiarys.FragmentListPage.PageState;
 import cn.hartech.jdiarys.engine.importdiary.ImportOrangeDiary;
@@ -28,7 +27,7 @@ import cn.hartech.jdiarys.ui.MyDialogs;
  */
 public class Actions {
 
-	// 页面跳出提示信息的统一入口
+	// 提示信息
 	public static void showToast(String text) {
 
 		showToast(text, Toast.LENGTH_SHORT);
@@ -97,7 +96,9 @@ public class Actions {
 	public static void onClickEnableEditDiary() {
 
 		All.diaryPage.setMode(FragmentDiaryPage.PageState.EDITING);
-		All.diaryPage.requestFocusForEditor();
+		All.diaryPage.editTextContent
+				.setSelection(All.diaryPage.editTextContent.getText().length());
+		All.diaryPage.showSoftInputForEditor();
 
 	}
 
@@ -130,15 +131,34 @@ public class Actions {
 		MyDialogs.makeConfirmDialog(All.mainActivity, "确定删除该日记？", action);
 	}
 
+	// 当菜单打开时触发
+	public static void onMenuOpen() {
+
+		if (All.editTextSearchInput.getVisibility() == View.VISIBLE) {
+
+			All.mainActivity.showSoftInputForSearch();
+		}
+	}
+
+	// 当菜单关闭时触发
+	public static void onMenuClose() {
+
+		if (All.editTextSearchInput.getVisibility() == View.VISIBLE
+				&& All.editTextSearchInput.getText().length() == 0) {
+			All.mainActivity.toggleSearchInput();
+		}
+
+		All.mainActivity.hideSoftInputForSearch();
+	}
+
 	// 当进入列表页面时触发
 	public static void whenEnterListPage() {
 
-		InputMethodManager imm = (InputMethodManager) All.mainActivity
-				.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.hideSoftInputFromWindow(
-				All.diaryPage.editTextContent.getWindowToken(), 0);
+		All.diaryPage.hideSoftInputForEditor();
 
-		All.diaryPage.addOrUpdateDiary();
+		if (All.diaryPage.addOrUpdateDiary()) {
+			All.diaryPage.setMode(FragmentDiaryPage.PageState.SHOWING);
+		}
 
 	}
 
@@ -147,7 +167,7 @@ public class Actions {
 
 		// 第一次打开APP时，切入详情页时，调起键盘
 		if (All.diaryPage.pageState == FragmentDiaryPage.PageState.ADDING) {
-			All.diaryPage.requestFocusForEditor();
+			All.diaryPage.showSoftInputForEditor();
 		}
 	}
 
@@ -160,7 +180,7 @@ public class Actions {
 
 		All.mainActivity.viewPager.setCurrentItem(1);
 
-		All.diaryPage.requestFocusForEditor();
+		All.diaryPage.showSoftInputForEditor();
 
 	}
 

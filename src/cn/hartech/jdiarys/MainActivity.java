@@ -21,7 +21,8 @@ import cn.hartech.jdiarys.dao.DiaryDAO;
 import cn.hartech.jdiarys.utils.Constant;
 
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnClosedListener;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnCloseListener;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 public class MainActivity extends SlidingFragmentActivity {
@@ -106,17 +107,24 @@ public class MainActivity extends SlidingFragmentActivity {
 		// 全屏监听菜单滑动事件
 		slidingMenu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
-		// 菜单上左滑关闭事件会与菜单上的按钮onclick冲突
-		//slideMenu.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
+		// 菜单上进行左滑事件会使得与菜单上的按钮onclick失效
+		//		slidingMenu.setTouchModeBehind(SlidingMenu.TOUCHMODE_FULLSCREEN);
 
-		// 检测到菜单关闭时关闭搜索框
-		slidingMenu.setOnClosedListener(new OnClosedListener() {
+		// 检测到菜单关闭时触发
+		slidingMenu.setOnCloseListener(new OnCloseListener() {
 			@Override
-			public void onClosed() {
-				if (All.editTextSearchInput.getVisibility() == View.VISIBLE
-						&& All.editTextSearchInput.getText().length() == 0) {
-					toggleSearchInput();
-				}
+			public void onClose() {
+
+				Actions.onMenuClose();
+			}
+		});
+
+		// 检测到菜单打开时触发
+		slidingMenu.setOnOpenListener(new OnOpenListener() {
+			@Override
+			public void onOpen() {
+
+				Actions.onMenuOpen();
 			}
 		});
 
@@ -216,11 +224,25 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		toggleSearchInput();
 
+		// 显示软键盘
+		showSoftInputForSearch();
+	}
+
+	// 为搜索框打开软键盘
+	public void showSoftInputForSearch() {
+
 		All.editTextSearchInput.requestFocus();
 
-		// 显示软键盘
-		InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(All.editTextSearchInput, 0);
+		InputMethodManager input = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		input.showSoftInput(All.editTextSearchInput, 0);
+	}
+
+	// 为搜索框关闭软键盘
+	public void hideSoftInputForSearch() {
+
+		InputMethodManager input = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+		input.hideSoftInputFromWindow(All.editTextSearchInput.getWindowToken(),
+				0);
 	}
 
 	// 日记详情页面的编辑按钮

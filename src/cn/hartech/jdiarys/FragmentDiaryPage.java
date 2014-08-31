@@ -267,17 +267,22 @@ public class FragmentDiaryPage extends Fragment {
 
 	}
 
-	// 为编辑器调起软键盘
-	public void requestFocusForEditor() {
+	// 为编辑框打开软键盘
+	public void showSoftInputForEditor() {
 
-		editTextContent.setSelection(editTextContent.getText().length());
 		editTextContent.requestFocus();
 
-		// 显示软键盘
-		InputMethodManager imm = (InputMethodManager) getActivity()
+		InputMethodManager input = (InputMethodManager) getActivity()
 				.getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.showSoftInput(editTextContent, 0);
+		input.showSoftInput(editTextContent, 0);
+	}
 
+	// 为编辑框关闭软键盘
+	public void hideSoftInputForEditor() {
+
+		InputMethodManager input = (InputMethodManager) getActivity()
+				.getSystemService(Context.INPUT_METHOD_SERVICE);
+		input.hideSoftInputFromWindow(editTextContent.getWindowToken(), 0);
 	}
 
 	private LayoutParams makeOneLayoutParam() {
