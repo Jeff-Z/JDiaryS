@@ -30,6 +30,12 @@ public class DiaryPOJO {
 
 	public String tags;
 
+	public Date modifyTime;
+
+	public int modifyCount;
+
+	public boolean isDelete = false;
+
 	public static DiaryPOJO createDiaryPOJO() {
 
 		DiaryPOJO diary = new DiaryPOJO();

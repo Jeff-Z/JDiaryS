@@ -80,7 +80,7 @@ public class DBHelper extends SQLiteOpenHelper {
 		String createTableSQL = "create table diary_content"
 				+ "(_id integer primary key autoincrement, "
 				+ "diary_time, diary_year, diary_month, diary_day, diary_hour, "
-				+ "content, tags)";
+				+ "content, tags, modify_time, modify_count, is_delete)";
 
 		database.execSQL(createTableSQL);
 	}

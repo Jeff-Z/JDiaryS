@@ -81,7 +81,8 @@ public class SearchEngine {
 		if (text.length() == 4) {
 
 			String sql = "select * from diary_content "
-					+ " where diary_year = " + text + " order by diary_time ";
+					+ " where diary_year = " + text
+					+ " and is_delete = 0 order by diary_time ";
 
 			result = All.diaryDAO.getListWithSQL(sql, null);
 
@@ -90,7 +91,7 @@ public class SearchEngine {
 			String sql = "select * from diary_content "
 					+ " where diary_year = " + text.substring(0, 4)
 					+ " and diary_month = " + text.substring(4, 6)
-					+ " order by diary_time ";
+					+ " and is_delete = 0 order by diary_time ";
 
 			result = All.diaryDAO.getListWithSQL(sql, null);
 
@@ -100,7 +101,7 @@ public class SearchEngine {
 					+ " where diary_year = " + text.substring(0, 4)
 					+ " and diary_month = " + text.substring(4, 6)
 					+ " and diary_day = " + text.substring(6, 8)
-					+ " order by diary_time ";
+					+ " and is_delete = 0 order by diary_time ";
 
 			result = All.diaryDAO.getListWithSQL(sql, null);
 
@@ -163,7 +164,7 @@ public class SearchEngine {
 		}
 
 		String sql = "select * from diary_content where " + condition
-				+ " order by diary_time desc";
+				+ " and is_delete = 0 order by diary_time desc";
 
 		List<DiaryPOJO> result = All.diaryDAO.getListWithSQL(sql, wordsArray);
 
@@ -185,7 +186,7 @@ public class SearchEngine {
 		String where = text.substring(1);
 
 		String sql = "select * from diary_content where " + where
-				+ " order by diary_time desc";
+				+ " and is_delete = 0  order by diary_time desc";
 
 		List<DiaryPOJO> result = All.diaryDAO.getListWithSQL(sql, null);
 

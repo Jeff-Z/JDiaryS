@@ -30,6 +30,10 @@ public class MyUtility {
 	// 这里主要是加上异常处理和同步处理
 	public static Date parse_yyyy_MM_dd_HH_mm_ss(String dateStr) {
 
+		if (dateStr == null || dateStr.trim().equals("")) {
+			return null;
+		}
+
 		try {
 
 			synchronized (DF_yyyy_MM_dd_HH_mm_ss) {
@@ -38,13 +42,17 @@ public class MyUtility {
 
 		} catch (Exception e) {
 
-			return new Date(0);
+			return null;
 		}
 
 	}
 
 	// 这里主要是加上异常处理和同步处理
 	public static String format_yyyy_MM_dd_HH_mm_ss(Date date) {
+
+		if (date == null) {
+			return null;
+		}
 
 		try {
 
