@@ -41,8 +41,6 @@ public class ImportOrangeDiary {
 			return;
 		}
 
-		diaryDAO.deleteAllRecords();
-
 		try {
 
 			diaryDAO.addList(diaryList);
@@ -92,8 +90,15 @@ public class ImportOrangeDiary {
 
 					DiaryPOJO diary = new DiaryPOJO();
 					diary.content = str[2];
+
+					// OrangeDiary APP导出的CSV文件里
+					// 把2005-01-01 凌晨零点 导出成 “2005-01-01_24:30”
+					// 这个在这里被解析成  “2005-01-02_00:30” 了
+					// 这里纠正成“2005-01-01_00:30”
+					str[3] = str[3].replace("24:", "00:");
+
 					diary.diaryTime = dateFormat.parse(str[3]);
-					diary.tags = str[4];
+					diary.tags = processTags(str[4]);
 
 					diary.makeOtherDateValues();
 
@@ -130,6 +135,24 @@ public class ImportOrangeDiary {
 		}
 
 		return new ArrayList<DiaryPOJO>(daily);
+	}
+
+	// 专门用来处理Tags字段
+	//		1, 把"手机日记"全部替换为"[FromNokia_20111208]"
+	//		2, 所有Tags后面均追加本次导入信息："[FromOrangeDiary_20140907]"
+	private static String processTags(String tags) {
+
+		if (tags == null || "".equals(tags.trim())) {
+
+			tags = "[FromOrangeDiary_20140907]";
+
+		} else {
+
+			tags = tags.replace("手机日记", "[FromNokia_20111211]");
+			tags += " [FromOrangeDiary_20140907]";
+		}
+
+		return tags;
 	}
 
 	// 从OrangeDiary软件的备份目录中获取最新的备份文件

@@ -17,7 +17,7 @@ public class Constant {
 	public static final String DB_FILE_NAME = "jdiary_database.db";
 
 	// 整个工程的统一时区
-	public static final Locale LOCAL = Locale.US;
+	public static final Locale LOCAL = Locale.CHINA;
 
 	// 启动时页面显示多少条数据
 	public static final int MONTH_ITEM_INIT_COUNT = 50;

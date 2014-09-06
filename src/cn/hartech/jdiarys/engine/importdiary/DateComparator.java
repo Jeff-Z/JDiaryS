@@ -10,7 +10,7 @@ public class DateComparator implements Comparator<DiaryPOJO> {
 
 		long i = o1.diaryTime.getTime() - o2.diaryTime.getTime();
 
-		if (i > 0) {
+		if (i >= 0) {
 			return 1;
 		} else {
 			return -1;
