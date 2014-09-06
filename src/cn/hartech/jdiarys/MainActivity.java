@@ -216,7 +216,9 @@ public class MainActivity extends SlidingFragmentActivity {
 	// 页面点击Setting按钮激发事件
 	public void onClickImportDiaryData(View view) {
 
-		Actions.onImportDiaryData(view);
+		// 2014年9月7日 正式启用JDiaryS
+		// 把数据导入功能关闭
+		//		Actions.onImportDiaryData(view);
 	}
 
 	// 菜单栏上 点击后出现搜索框
