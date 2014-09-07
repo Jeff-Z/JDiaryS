@@ -4,11 +4,17 @@ import java.util.Locale;
 
 public class Constant {
 
+	// 当前是否是测试环境
+	public static final boolean IS_TEST_ENV = true;
+
 	// 本App的名字（出现在对话框顶部等）
 	public static final String APP_NAME = "JDiaryS!";
 
 	// 本app在SD Card上的目录位置
 	public static final String APP_FOLDER = "JDiaryS";
+
+	// 本app在SD Card上的目录位置（测试环境）
+	public static final String APP_FOLDER_TEST_ENV = "_JDiaryS_Test";
 
 	// 配置文件名称
 	public static final String PROPERTY_FILE_NAME = "property.txt";
