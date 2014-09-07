@@ -33,9 +33,6 @@ public class FragmentDiaryPage extends Fragment {
 	// 当前对应的Diary数据对象
 	public DiaryPOJO diaryPOJO;
 
-	// 当前显示的日记是在listView中什么位置，用来编辑后回去更新列表
-	public int listViewPosition;
-
 	public PageState pageState = PageState.ADDING;
 
 	// 当前本页面的状态：显示最新内容、
@@ -142,7 +139,7 @@ public class FragmentDiaryPage extends Fragment {
 
 			diaryPOJO._id = All.diaryDAO.add(diaryPOJO);
 			All.adapterListPageData.add(0, diaryPOJO);
-			listViewPosition = 0;
+
 			All.listPage.scrollToTop();
 
 			pageState = PageState.EDITING;
@@ -162,7 +159,8 @@ public class FragmentDiaryPage extends Fragment {
 			textViewContent.setText(newText);
 
 			All.diaryDAO.update(diaryPOJO);
-			All.adapterListPageData.set(listViewPosition, diaryPOJO);
+
+			All.adapterListPageData.notifyDataSetChanged();
 
 			Actions.showToast("保存好啦~");
 

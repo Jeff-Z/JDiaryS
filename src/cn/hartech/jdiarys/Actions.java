@@ -84,7 +84,6 @@ public class Actions {
 		DiaryPOJO diary = All.adapterListPageData.getItem(position);
 
 		All.diaryPage.diaryPOJO = diary;
-		All.diaryPage.listViewPosition = position;
 
 		All.diaryPage.setMode(FragmentDiaryPage.PageState.SHOWING);
 
@@ -118,7 +117,7 @@ public class Actions {
 
 				All.diaryDAO.delete(All.diaryPage.diaryPOJO);
 
-				All.adapterListPageData.remove(All.diaryPage.listViewPosition);
+				All.adapterListPageData.remove(All.diaryPage.diaryPOJO);
 
 				All.mainActivity.viewPager.setCurrentItem(0);
 
