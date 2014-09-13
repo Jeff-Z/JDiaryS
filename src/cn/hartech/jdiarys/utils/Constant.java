@@ -26,7 +26,7 @@ public class Constant {
 	public static final Locale LOCAL = Locale.CHINA;
 
 	// 启动时页面显示多少条数据
-	public static final int MONTH_ITEM_INIT_COUNT = 50;
+	public static final int MONTH_ITEM_INIT_COUNT = 30;
 
 	// 每次自动加载时加载多少条数据
 	public static final int AUTO_LOAD_DATA_COUNT = 50;
