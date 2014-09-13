@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="14dp"
         android:src="@drawable/logo" 
         android:contentDescription="LOGO"/>
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imageView_logo"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="30dp"
         android:src="@drawable/button_write"
         android:onClick="onClickWriteDiary" 
         android:contentDescription="Write Diary"/>
@@ -32,11 +32,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/imageView_write"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:src="@drawable/button_calander"
         android:onClick="onClickOpenCalander" 
         android:contentDescription="Open Calander"/>
 
+     <ImageView
+        android:id="@+id/imageView_favor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/imageView_calander"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/button_favor"
+        android:onClick="onClickOpenFavorList" 
+        android:contentDescription="Open Favor List"/>
 
     <EditText
         android:id="@+id/editText_SearchInput"
@@ -44,10 +54,10 @@
         android:layout_width="228dp"
         android:layout_height="wrap_content"
         
-        android:layout_below="@+id/imageView_calander"
+        android:layout_below="@+id/imageView_favor"
         android:layout_alignParentLeft="true"
         
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
 
         android:hint="输入搜索内容"
         android:imeOptions="actionSearch"
@@ -59,9 +69,9 @@
         android:layout_height="wrap_content"
         
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/imageView_calander"
+        android:layout_below="@+id/imageView_favor"
         
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         
         android:onClick="showSearchInput"
         android:src="@drawable/button_search" 

@@ -8,12 +8,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Toast;
 import cn.hartech.jdiarys.FragmentListPage.PageState;
 import cn.hartech.jdiarys.engine.importdiary.ImportOrangeDiary;
 import cn.hartech.jdiarys.engine.search.SearchEngine;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
+import cn.hartech.jdiarys.ui.AdapterForListPage.ViewHolder;
 import cn.hartech.jdiarys.ui.MyDialogs;
+import cn.hartech.jdiarys.ui.UIUtility;
 
 /**
  * 把界面所有**用户交互**的动作都拎出来，这里作为Controller
@@ -212,6 +215,51 @@ public class Actions {
 		clipboard.setPrimaryClip(clipData);
 
 		Actions.showToast("复制好啦~~");
+
+	}
+
+	// 当用户在列表上长按某个日历时触发 - 收藏该日记 或 取消收藏
+	public static void onLongClickOnList(AdapterView<?> parent, View view,
+			int position) {
+
+		DiaryPOJO diary = (DiaryPOJO) parent.getAdapter().getItem(position);
+
+		diary.isFavor = !diary.isFavor;
+
+		All.diaryDAO.update(diary);
+
+		ViewHolder viewHolder = (ViewHolder) view.getTag();
+		UIUtility.setFavor(viewHolder, diary.isFavor);
+
+		if (diary.isFavor) {
+			Actions.showToast("收藏完毕！");
+		} else {
+			Actions.showToast("取消收藏！");
+		}
+
+	}
+
+	// 用户点击菜单上的“我的收藏”
+	public static void onClickOpenFavorList() {
+
+		List<DiaryPOJO> diaryList = All.diaryDAO.getFavorList();
+
+		if (diaryList == null) {
+			return;
+		} else if (diaryList.size() == 0) {
+			showToast("目前无收藏日记");
+			return;
+		}
+
+		showToast("共有" + diaryList.size() + "条收藏日记。");
+
+		All.listPage.pageState = PageState.SEARCH_RESULT;
+
+		All.listPage.loadDataForPage(diaryList);
+
+		All.listPage.scrollToTop();
+
+		All.mainActivity.showContent();
 
 	}
 }

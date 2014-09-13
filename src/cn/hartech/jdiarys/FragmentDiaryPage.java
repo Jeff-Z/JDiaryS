@@ -13,11 +13,13 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
+import cn.hartech.jdiarys.ui.UIUtility;
 import cn.hartech.jdiarys.utils.Constant;
 
 public class FragmentDiaryPage extends Fragment {
@@ -26,6 +28,7 @@ public class FragmentDiaryPage extends Fragment {
 	private TextView textViewMonth;
 	public TextView textViewContent;
 	public EditText editTextContent;
+	private ImageView imageViewFavor;
 	private ScrollView scrollView;
 	private LinearLayout layoutEditPanel;
 	private Button buttonEdit, buttonDelete, buttonSave;
@@ -91,6 +94,9 @@ public class FragmentDiaryPage extends Fragment {
 
 		editTextContent = (EditText) view
 				.findViewById(R.id.view_content_body_edit);
+		imageViewFavor = (ImageView) view
+				.findViewById(R.id.imageView_favor_icon);
+
 		layoutEditPanel = (LinearLayout) view
 				.findViewById(R.id.view_edit_panel);
 
@@ -262,6 +268,8 @@ public class FragmentDiaryPage extends Fragment {
 				+ "日");
 		textViewContent.setText(diaryPOJO.content);
 		editTextContent.setText(diaryPOJO.content);
+
+		UIUtility.setFavor(imageViewFavor, textViewContent, diaryPOJO.isFavor);
 
 	}
 

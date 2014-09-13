@@ -155,7 +155,7 @@ public class MyUtility {
 
 				String appFolder = "";
 
-				if (Constant.IS_TEST_ENV) {
+				if (Constant.IS_TEST_ENVIRONMENT) {
 					appFolder = Constant.APP_FOLDER_TEST_ENV;
 				} else {
 					appFolder = Constant.APP_FOLDER;

@@ -54,14 +54,15 @@
 	        android:layout_marginLeft="0dp"
 	        android:layout_marginRight="0dp"
 	        
-	        android:paddingTop="17dp"
-	        android:paddingBottom="17dp"
+	        android:paddingTop="20dp"
+	        android:paddingBottom="20dp"
 	        android:paddingLeft="6dp"
 	        android:paddingRight="2dp"
 	
-	        android:background="@drawable/text_border"
+	        android:background="@drawable/textview_border_show"
 	        
-	        android:textSize="14sp" />
+	        android:textSize="14sp"
+	        android:lineSpacingMultiplier="1.2" />
 	        
 	    <EditText
 	        android:id="@+id/view_content_body_edit"
@@ -79,15 +80,28 @@
 	        android:layout_marginLeft="0dp"
 	        android:layout_marginRight="0dp"
 	        
-	        android:paddingTop="17dp"
-	        android:paddingBottom="17dp"
+	        android:paddingTop="20dp"
+	        android:paddingBottom="20dp"
 	        android:paddingLeft="6dp"
 	        android:paddingRight="2dp"
 	
-	        android:background="@drawable/editor_background"
+	        android:background="@drawable/textview_border_editor"
 	        
 	        android:textSize="14sp" 
+	        android:lineSpacingMultiplier="1.2"
 	        android:inputType="textMultiLine"/>
+	    
+	    <ImageView
+            android:id="@+id/imageView_favor_icon"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/view_content_title_month"
+            android:layout_below="@+id/view_content_title_month"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="9dp"
+            android:src="@drawable/favor" 
+            android:contentDescription="Favor"/>
 	
 	</RelativeLayout>
 	

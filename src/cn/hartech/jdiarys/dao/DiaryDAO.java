@@ -21,14 +21,15 @@ public class DiaryDAO extends DBHelper {
 
 	public int add(DiaryPOJO diary) {
 
-		String insertSQL = "insert into diary_content values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String insertSQL = "insert into diary_content values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 		db.execSQL(
 				insertSQL,
 				new Object[] {
 						MyUtility.format_yyyy_MM_dd_HH_mm_ss(diary.diaryTime),
 						diary.diaryYear, diary.diaryMonth, diary.diaryDay,
-						diary.diaryHour, diary.content, diary.tags,
+						diary.diaryHour, diary.content, diary.isFavor,
+						diary.tags,
 						MyUtility.format_yyyy_MM_dd_HH_mm_ss(diary.modifyTime),
 						diary.modifyCount, diary.isDelete });
 
@@ -54,7 +55,7 @@ public class DiaryDAO extends DBHelper {
 			String insertSQL = null;
 			for (DiaryPOJO diary : diaryList) {
 
-				insertSQL = "insert into diary_content values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+				insertSQL = "insert into diary_content values(null, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 				db.execSQL(
 						insertSQL,
@@ -66,6 +67,7 @@ public class DiaryDAO extends DBHelper {
 								diary.diaryDay,
 								diary.diaryHour,
 								diary.content,
+								diary.isFavor,
 								diary.tags,
 								MyUtility
 										.format_yyyy_MM_dd_HH_mm_ss(diary.modifyTime),
@@ -88,6 +90,7 @@ public class DiaryDAO extends DBHelper {
 	public void update(DiaryPOJO diary) {
 
 		if (diary == null || diary._id == 0) {
+			Actions.showToast("更新数据失败：对象或id为空。 内容：" + diary.content);
 			return;
 		}
 
@@ -97,7 +100,7 @@ public class DiaryDAO extends DBHelper {
 
 		String updateSQL = "update diary_content set diary_time = ?, "
 				+ "diary_year = ?, diary_month = ?, diary_day = ?, "
-				+ "diary_hour = ?, content = ?, tags = ?, "
+				+ "diary_hour = ?, content = ?, is_favor = ?, tags = ?, "
 				+ "modify_time = ?, modify_count = ?, is_delete = ? "
 				+ "where _id = ?";
 
@@ -106,7 +109,8 @@ public class DiaryDAO extends DBHelper {
 				new Object[] {
 						MyUtility.format_yyyy_MM_dd_HH_mm_ss(diary.diaryTime),
 						diary.diaryYear, diary.diaryMonth, diary.diaryDay,
-						diary.diaryHour, diary.content, diary.tags,
+						diary.diaryHour, diary.content, diary.isFavor,
+						diary.tags,
 						MyUtility.format_yyyy_MM_dd_HH_mm_ss(diary.modifyTime),
 						diary.modifyCount, diary.isDelete, diary._id });
 	}
@@ -129,6 +133,16 @@ public class DiaryDAO extends DBHelper {
 				+ "where diary_year = ? and diary_month = ? and is_delete = 0 "
 				+ "order by diary_time desc",
 				new String[] { String.valueOf(year), String.valueOf(month) });
+
+		return getDiaryListFromCursor(cursor);
+	}
+
+	// 获取收藏列表
+	public List<DiaryPOJO> getFavorList() {
+
+		Cursor cursor = db.rawQuery(
+				"select * from diary_content where is_favor = 1 and is_delete = 0 "
+						+ "order by diary_time desc", null);
 
 		return getDiaryListFromCursor(cursor);
 	}
@@ -179,17 +193,15 @@ public class DiaryDAO extends DBHelper {
 
 			diary.content = cursor.getString(6);
 
-			diary.tags = cursor.getString(7);
+			diary.isFavor = getBooleanValue(cursor.getString(7));
+
+			diary.tags = cursor.getString(8);
 
 			diary.modifyTime = MyUtility.parse_yyyy_MM_dd_HH_mm_ss(cursor
-					.getString(8));
-			diary.modifyCount = cursor.getInt(9);
+					.getString(9));
+			diary.modifyCount = cursor.getInt(10);
 
-			if ("1".equals(cursor.getString(10))) {
-				diary.isDelete = true;
-			} else {
-				diary.isDelete = false;
-			}
+			diary.isDelete = getBooleanValue(cursor.getString(11));
 
 			list.add(diary);
 		}
@@ -198,6 +210,16 @@ public class DiaryDAO extends DBHelper {
 		cursor = null;
 
 		return list;
+	}
+
+	private boolean getBooleanValue(String value) {
+
+		if ("1".equals(value)) {
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 
 }

@@ -6,6 +6,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import cn.hartech.jdiarys.R;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
@@ -48,6 +49,8 @@ public class AdapterForListPage extends ArrayAdapter<DiaryPOJO> {
 					.findViewById(R.id.view_content_title_month);
 			viewHolder.textViewBody = (TextView) view
 					.findViewById(R.id.view_content_body);
+			viewHolder.imageViewFavor = (ImageView) view
+					.findViewById(R.id.imageView_favor_icon);
 
 			view.setTag(viewHolder);
 
@@ -65,13 +68,24 @@ public class AdapterForListPage extends ArrayAdapter<DiaryPOJO> {
 
 		viewHolder.textViewBody.setText(diary.content);
 
+		UIUtility.setFavor(viewHolder, diary.isFavor);
+
 		return view;
 
 	}
 
-	private static class ViewHolder {
+	/**
+	 * 这里使用一个ViewHolder对象来保存这个View每次需要改变内容的元素
+	 * 
+	 * 这样就不用每次初始化View是都findViewById一遍了。
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年9月14日
+	 */
+	public static class ViewHolder {
 		TextView textViewTitleYear;
 		TextView textViewTitleMonth;
 		TextView textViewBody;
+		ImageView imageViewFavor;
 	}
 }

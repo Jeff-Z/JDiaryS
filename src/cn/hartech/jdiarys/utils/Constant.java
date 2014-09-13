@@ -4,8 +4,8 @@ import java.util.Locale;
 
 public class Constant {
 
-	// 当前是否是测试环境
-	public static final boolean IS_TEST_ENV = true;
+	// 当前是否是测试环境environment
+	public static final boolean IS_TEST_ENVIRONMENT = false;
 
 	// 本App的名字（出现在对话框顶部等）
 	public static final String APP_NAME = "JDiaryS!";

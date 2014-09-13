@@ -13,6 +13,7 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
@@ -89,6 +90,9 @@ public class FragmentListPage extends Fragment {
 		// 处理日志双击事件
 		listView.setOnItemClickListener(new ListViewOnItemClickListener());
 
+		// 处理日记长按事件
+		listView.setOnItemLongClickListener(new ListViewOnItemLongClickListener());
+
 		layout.addView(listView);
 	}
 
@@ -125,6 +129,25 @@ public class FragmentListPage extends Fragment {
 
 	public void scrollToTop() {
 		listView.setSelection(0);
+	}
+
+	/**
+	 * 处理长按事件
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年9月13日
+	 */
+	private final class ListViewOnItemLongClickListener implements
+			OnItemLongClickListener {
+
+		@Override
+		public boolean onItemLongClick(AdapterView<?> parent, View view,
+				int position, long id) {
+
+			Actions.onLongClickOnList(parent, view, position);
+
+			return true;
+		}
 	}
 
 	/**

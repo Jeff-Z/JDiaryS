@@ -28,6 +28,8 @@ public class DiaryPOJO {
 
 	public String content;
 
+	public boolean isFavor = false;
+
 	public String tags;
 
 	public Date modifyTime;

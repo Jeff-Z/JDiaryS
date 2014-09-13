@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <!-- 这里用两个item shape矩形重叠起来实现上下边框。。。 -->
+    <item>
+        <shape>
+
+            <!-- 边框颜色 -->
+            <!-- 灰色：#DDDDDF -->
+            <!-- 绿色：#9FFF80 -->
+            <!-- 红色：#FFE1E1 -->
+            <solid android:color="#9FFF80" />
+        </shape>
+    </item>
+    
+    <item
+        android:bottom="1dip"
+        android:top="1dip">
+        <shape>
+            <!-- 背景颜色值 -->
+            <!-- 银色背景：FCFCFC -->
+            <!-- 淡黄：#FFFFFA -->
+            <!-- 绿色：#F7FFF7 -->
+            <!-- 红色：#FFF5F5 -->
+            <solid android:color="#F7FFF7" />
+        </shape>
+    </item>
+</layer-list>

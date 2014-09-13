@@ -218,7 +218,9 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		// 2014年9月7日 正式启用JDiaryS
 		// 把数据导入功能关闭
-		//		Actions.onImportDiaryData(view);
+		if (Constant.IS_TEST_ENVIRONMENT) {
+			Actions.onImportDiaryData(view);
+		}
 	}
 
 	// 菜单栏上 点击后出现搜索框
@@ -296,6 +298,11 @@ public class MainActivity extends SlidingFragmentActivity {
 
 		startActivity(intent);
 
+	}
+
+	public void onClickOpenFavorList(View view) {
+
+		Actions.onClickOpenFavorList();
 	}
 
 	private long mExitTime;
