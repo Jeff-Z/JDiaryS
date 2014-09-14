@@ -27,6 +27,23 @@ public class MyUtility {
 		Log.e("FIRE LOG!!", "" + new Date());
 	}
 
+	/**
+	 * 判断是否为整数
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年9月14日
+	 * @param text
+	 * @return
+	 */
+	public static boolean isInteger(String text) {
+		try {
+			Integer.parseInt(text);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}
+
 	// 这里主要是加上异常处理和同步处理
 	public static Date parse_yyyy_MM_dd_HH_mm_ss(String dateStr) {
 

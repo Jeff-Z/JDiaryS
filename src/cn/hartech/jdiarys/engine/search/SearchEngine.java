@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import cn.hartech.jdiarys.All;
 import cn.hartech.jdiarys.pojo.DiaryPOJO;
+import cn.hartech.jdiarys.utils.MyUtility;
 
 /**
  * 日记搜索引擎
@@ -26,6 +27,7 @@ public class SearchEngine {
 	 * 
 	 * 2, 日期搜索模式：
 	 * 		输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 * 		也可支持年份缩写前两位的："120506" "1205"
 	 * 
 	 * 3, 支持多关键字或集搜索：
 	 * 		如 "令狐冲 或  笑傲江湖"
@@ -114,6 +116,7 @@ public class SearchEngine {
 	 * 
 	 * 日期搜索模式：
 	 * 	输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 *  也可支持年份缩写前两位的："120506" "1205"
 	 * 
 	 * 
 	 * @author Jeff.Z
@@ -126,6 +129,11 @@ public class SearchEngine {
 		List<DiaryPOJO> result = null;
 
 		// 经过前面的检查，这里进来的肯定是长度为4|6|8的数字
+
+		// 判断是否是年份缩写前两位的，如果是，前面加上"20"，因为日记都是2000年后的
+		if (!text.startsWith("20") && text.length() != 8) {
+			text = "20" + text;
+		}
 
 		if (text.length() == 4) {
 
@@ -164,6 +172,7 @@ public class SearchEngine {
 	 * 
 	 * 日期搜索模式：
 	 * 	输入 "20120506" 或  "201205" 或  "2012" 返回该时间段的日记
+	 *  也可支持年份缩写前两位的："120506" "1205"
 	 * 
 	 * @author Jeff.Z
 	 * @date 2014年8月30日
@@ -176,16 +185,15 @@ public class SearchEngine {
 			return false;
 		}
 
-		if (!(text.startsWith("20") || text.startsWith("19"))) {
+		if (!MyUtility.isInteger(text)) {
 			return false;
 		}
 
-		try {
-			Integer.parseInt(text);
-			return true;
-		} catch (Exception ex) {
-			return false;
-		}
+		// 判断前两位是否在30以内，也就是说支持到2030年内的年份缩写搜索
+		int year = Integer.parseInt(text.substring(0, 2));
+
+		return year <= 30;
+
 	}
 
 	/**
