@@ -30,6 +30,7 @@ public class FragmentDiaryPage extends Fragment {
 	public EditText editTextContent;
 	private ImageView imageViewFavor;
 	private ScrollView scrollView;
+	private LinearLayout layoutEditPanel;
 	private Button buttonEdit, buttonDelete, buttonSave;
 
 	// 当前对应的Diary数据对象
@@ -95,6 +96,9 @@ public class FragmentDiaryPage extends Fragment {
 				.findViewById(R.id.view_content_body_edit);
 		imageViewFavor = (ImageView) view
 				.findViewById(R.id.imageView_favor_icon);
+
+		layoutEditPanel = (LinearLayout) view
+				.findViewById(R.id.view_edit_panel);
 
 		buttonEdit = (Button) view.findViewById(R.id.view_button_edit);
 		buttonDelete = (Button) view.findViewById(R.id.view_button_delete);
