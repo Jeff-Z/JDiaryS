@@ -22,6 +22,23 @@ public class MyUtility {
 	public static final SimpleDateFormat DF_yyyy_MM_dd_HH_mm = new SimpleDateFormat(
 			"yyyy-MM-dd HH:mm", Constant.LOCAL);
 
+	/**
+	 * 判断是否为整数
+	 * 
+	 * @author Jeff.Z
+	 * @date 2014年9月14日
+	 * @param text
+	 * @return
+	 */
+	public static boolean isInteger(String text) {
+		try {
+			Integer.parseInt(text);
+			return true;
+		} catch (Exception ex) {
+			return false;
+		}
+	}
+
 	public static void fireLog() {
 
 		Log.e("FIRE LOG!!", "" + new Date());
